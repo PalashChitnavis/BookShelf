@@ -1,27 +1,32 @@
+import { useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
-
+import Fiction from "./Fiction";
+import Mystery from "./Mystery";
+import Romance from "./Romance";
+import Horror from "./Horror";
 function TabSection() {
+  const [key, setKey] = useState("fiction");
+
   return (
     <Tabs
-      defaultActiveKey="profile"
-      id="uncontrolled-tab-example"
-      className="mb-3 d-flex justify-content-evenly"
+      id="controlled-tab-example"
+      activeKey={key}
+      onSelect={(k) => setKey(k)}
+      className="mb-3"
+      fill
     >
-      <Tab eventKey="genre" title="Genre Spotlight">
-        Tab content for Genre Spotlight
+      <Tab eventKey="fiction" title="Fiction" className="col-6 col-md-3 w-100">
+        <Fiction />
       </Tab>
-      <Tab eventKey="author" title="Author Spotlight">
-        Tab content for Author Spotlight
+      <Tab eventKey="mystery" title="Mystery" className="col-6 col-md-3 w-100">
+        <Mystery />
       </Tab>
-      <Tab eventKey="new" title="New and Noteworthy">
-        Tab content for New and Noteworthy
+      <Tab eventKey="romance" title="Romance" className="col-6 col-md-3 w-100">
+        <Romance />
       </Tab>
-      <Tab eventKey="top" title="Top of the Month">
-        Tab content for Top of the month
-      </Tab>
-      <Tab eventKey="classics" title="Classics Reimagined">
-        Tab content for Classics
+      <Tab eventKey="horror" title="Horror" className="col-6 col-md-3 w-100">
+        <Horror />
       </Tab>
     </Tabs>
   );

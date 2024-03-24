@@ -1,20 +1,32 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import "./App.css";
 import Header from "./components/Header";
-import CarouselHome from "./components/Carousel";
-import TabSection from "./components/TabSection";
+import HomePage from "./pages/HomePage";
+import { useDispatch } from "react-redux";
+import { typeOfDevice } from "./redux/deviceSlice";
+import { useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import Book from "./components/Book";
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (window.innerWidth < 768) {
+      dispatch(typeOfDevice("small"));
+    } else {
+      dispatch(typeOfDevice("large"));
+    }
+  }, []);
   return (
     <>
       <div>
         <div className="w-100">
           <Header />
         </div>
-        <div className="d-flex justify-content-center align-items-center p-2 w-100">
-          <CarouselHome />
-        </div>
-        <div className="py-3">
-          <TabSection />
-        </div>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/book" element={<Book />} />
+        </Routes>
       </div>
     </>
   );
